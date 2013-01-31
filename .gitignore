@@ -1,0 +1,8 @@
+.settings
+.project
+.pydevproject
+*.sqlite3
+*.pyc
+.env
+*.swp
+old

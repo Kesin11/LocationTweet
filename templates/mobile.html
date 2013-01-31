@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title>Location Tweet</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css"/>
+		<link rel="stylesheet" href="./static/mobile.css"/>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<!-- mapを表示するスクリプトはjqueryとjquery mobileの間に記述する -->
+		
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		<script tupe="text/javascript" src="../static/mobile.js"></script>
+		
+		
+		
+	</head>
+	<body onload=initialize()>
+		<div data-role="page" id="map">
+			<div data-role="header" data-position="fixed">
+					<a href="#" id='coordButton' data-role="button">現在地</a>
+					<h1>Location Tweet</h1>
+					<a href='#info' data-role='button' data-icon='info'>情報</a>
+			</div>
+			<div data-role="content" id="map_content">
+				<div id="map_canvas"></div>
+			</div>
+			<div data-role="footer" data-position="fixed">
+			 <form>
+				<input id="queryField" type='search' name='query', placeholder="例：東京タワー">
+			</form>
+			</div>
+		</div>
+		
+		<div data-role="page" id="tweetPage">
+			<div data-role="header", id="tweetPage-header">
+				<a href="#map" data-role="button" data-icon="arrow-l" data-inline="true">戻る</a>
+				<h3></h3>
+			</div>
+			<div data-role="content">
+				<div id="tweet"></div>
+			</div>
+			<div data-role="footer">
+				<a href="#map" data-role="button" data-icon="arrow-l" data-inline="true">戻る</a>
+			</div>
+		</div>
+		
+		<div data-role="page" id="info">
+			<div data-role="header">
+				<a href="#map" data-role="button" data-icon="arrow-l" data-inline="true">戻る</a>
+				<h3>情報</h3>
+			</div>
+			<div data-role="content">
+				<h3>Location Tweet</h3>
+				<p>気になる場所の今のつぶやきを見ることができます</p>
+				<p>学校、駅、観光地など気になる場所について他の人がどのようなつぶやきをしているか見てみましょう！新しい発見があるかもしれません</p>
+				<p>マーカーの色分けは以下のようになっています（Wikipediaの情報なので必ずしも正しいカテゴリ分けにはなっていません）</p>
+				<ul>
+					<li>青: 交通機関</li>
+					<li>橙: ランドマーク</li>
+					<li>黄: 教育機関</li>
+					<li>緑: 森林、山、川などの自然物</li>
+					<li>紫: 歴史的な出来事など</li>
+					<li>赤: その他</li>
+				</ul>
+				<p>開発情報は<a = href="http://d.hatena.ne.jp/Kesin/">ブログ</a>に載せる予定です</p>
+				<ul>
+					<li><a href="http://d.hatena.ne.jp/Kesin/20120929/1348917792">Wikipediaから位置情報のデータベースを作る</a></li>
+				</ul>
+				<p><img src="../static/myicon_normal.jpg">連絡は<a href="https://twitter.com/#!/Kesin11" rel="external">@Kesin11</a>までお願いします</p>
+				<p>変更履歴：</p>
+				<p>2012/12/08 ver1.0.1</p>
+				<ul>
+					<li>カテゴリ別に色分けの追加</li>
+				</ul>
+				<p>2012/09/30 ver1.0</p>
+				<ul>
+					<li>位置情報のデータベース更新</li>
+					<li>ツイートの時間情報表示</li>
+				</ul>
+				<p>2012/08/14 基本的な機能の仮実装	</p>
+		</div>
+		</div>
+
+	</body>
+</html>

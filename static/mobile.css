@@ -1,0 +1,49 @@
+/*モバイル版*/
+html{
+	height: 100%;
+}
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+/*mapをヘッダーを除いた部分にフルスクリーンにしたい*/
+#map .ui-content {
+	padding: 0;
+    position : absolute;
+    top      : 40px;
+    right    : 0;
+    bottom   : 40px;
+    left     : 0;
+}
+/* jquery mobileのテキスト省略の解除*/
+.ui-header .ui-title,
+.ui-footer .ui-title,
+.ui-btn-inner /* ボタン */
+/*.ui-li-heading, /* リスト見出し */
+/*.ui-li .ui-btn-text a.ui-link-inherit, /* リンクリスト */
+/*.ui-li-desc /* リスト詳細 */
+{
+    overflow: visible;
+    white-space: normal;
+}
+
+.tweetBlock{
+	display: table;
+	border-top: 1px solid #E8E8E8;
+
+	margin: 0px;
+	padding: 5px 5px 5px 5px;
+}
+.tweetBlock > .image-left{
+	display: table-cell;
+	vertical-align: top;
+}
+.tweetBlock > .text{
+	padding-left: 5px;
+	display: table-cell;
+}
+.text > .time {
+	font-size: small;
+	color: #777;
+}
