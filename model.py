@@ -6,7 +6,7 @@ from pymongo import Connection
 MONGO_URL = os.environ.get('MONGOHQ_URL')
 
 class Place(object):
-    '''Connect to MongoGB"'''
+    '''Connect to MongoDB"'''
     def __init__(self):
         '''Connect to database'''
         if MONGO_URL:
@@ -30,14 +30,12 @@ class Place(object):
                                         }
                                     }
                                     })
-        #本当はwhereでobject_idは取らないようにしてmongo_object->dict or jsonに変換すべき
         places_dic = [{'title':place['title'], 'category':place['category'], 'lat':place['coord'][1], 'lng':place['coord'][0]} for place in places]
         return places_dic
         
 if __name__ == "__main__":
+    '''テスト用'''
     place = Place()
     bounds = ['35.653754', '139.733087', '35.663465', '139.757807']
-#    latlng_low = ['35.653754', '139.733087']
-#    latlng_high = ['35.663465', '139.757807']
     places = place.get_box_places(bounds)
     print places

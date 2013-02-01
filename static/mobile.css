@@ -20,9 +20,6 @@ body {
 .ui-header .ui-title,
 .ui-footer .ui-title,
 .ui-btn-inner /* ボタン */
-/*.ui-li-heading, /* リスト見出し */
-/*.ui-li .ui-btn-text a.ui-link-inherit, /* リンクリスト */
-/*.ui-li-desc /* リスト詳細 */
 {
     overflow: visible;
     white-space: normal;

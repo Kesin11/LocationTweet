@@ -44,7 +44,6 @@ function initialize(){
 	var myOptions = {
 		zoom: 16,
 		minZoom: 15,
-		// center: getCurrentCoord(),
 		disableDefaultUI: true,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		zoomControl: true,
@@ -59,10 +58,7 @@ function initialize(){
 	$('#map_canvas').css('height', pageHeight+25);
 	setCurrentCoord(map);
 	
-	//bootstrapとの連携のために高さをピクセルで指定する必要がある
-	// $('#map_canvas').css('height', $(window).height());
-	
-	//map生成直後はgetBounds()で取得できない？よく分からん
+	//map生成直後はgetBounds()で取得できない？
 	//表示されている地図のlatlng
 	var pos, bounds;
 	google.maps.event.addListener(map, "bounds_changed", function(){
@@ -94,10 +90,6 @@ function initialize(){
 		setCurrentCoord(map);
 	});
 
-	//検索クエリを送って結果を表示させる
-	//$("#submitButton").click(function() {
-	//	setMapCenter(map);
-	//});
 	//検索窓でEnterを押したとき
 	$('#queryField').keypress(function(event){
 		var keyCode = event.keyCode; //? event.keyCode : event.which ? event.which : event.charCode;  
@@ -168,25 +160,14 @@ function createMarker(map, infoWindow, lat, lng, title, category) {
 		icon: icon.icon,
 		shadow: icon.shadow
 	});
-	/*情報ウィンドウを書き換えてからクリックされたマーカーに割り当てて表示*/
+	/*クリックされたマーカーの場所に対応するツイートページを表示*/
 	google.maps.event.addListener(marker, "click", function() {
-		// var content = '<a href="#tweetPage">' + name + '</a>';
-		// infoWindow.setContent(content);
-		// //RECOMMEND: この書き方でクリックされた瞬間にツイートが読み込まれてしまう。遷移が終わった時にロードするようにするにはどうしたらいい？
-		// $("#tweetPage").bind('pageshow', getTweet(name));
-		// infoWindow.open(map, marker);
 		$.mobile.changePage("#tweetPage");
 		$("#tweetPage").bind('pageshow', getTweet(title));
 	});
-	google.maps.event.addListener(marker, "mouseover", function() {
-		// infoWindow.setContent(name);
-		// infoWindow.open(map, marker);
-	});
-	google.maps.event.addListener(marker, "mouseout", function() {
-		// infoWindow.close();
-	});
 	return marker;
 }
+
 /*マーカーを全て削除する*/
 function removeAllMarker(marker_list) {
 	marker_list.forEach(function(marker, i) {
@@ -194,7 +175,7 @@ function removeAllMarker(marker_list) {
 	});
 }
 
-/*場所の名前からツイートを取得*/
+/*場所の名前からツイートを取得して表示*/
 function getTweet(title){
 	var html = '';
 	var url = "http://search.twitter.com/search.json?callback=?&q=" + title;
@@ -208,6 +189,7 @@ function getTweet(title){
 			$.each(result.results, function(i, item){
 				embedded_text = embedLink(item.text);
 				amountTime = niceTime(item.created_at);
+
 				html += "<div class=tweetBlock>";
 					html += "<p class=image-left><img src=" + item.profile_image_url + "></p>";
 					html += "<div class=text>";
@@ -230,8 +212,6 @@ function getTweet(title){
 /*ツイートのリンクテキストに<a>タグを付与する。必要があればユーザ名にも*/
 function embedLink(rawText){
 	var text = rawText;
-	//エラーが出るので改変。twitterが勝手に短縮するので記号系はいらないはず
-	//text = text.replace( new RegExp( "((?:https?|ftp)(?::\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+))", "g" ), "<a href=\"$1\">$1</a>" );
 	text = text.replace( new RegExp(  /((http[s]?:\/\/)([a-zA-Z0-9_]+)(\.[a-zA-Z0-9_\/\.?=]+))/g), '<a href=\"$1\" target="_blank">$1</a>' );
 	return text;
 }
